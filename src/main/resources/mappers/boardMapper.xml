@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://myatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.mapper.BoardMapper">
+
+	<insert id="create">
+		insert into
+		boardtable(title,contents,userId,siteNumber,bno)
+		values(#{title},#{contents},#{userId},#{siteNumber},#{bno})
+	</insert>
+
+	<select id="read" resultType="org.zerock.domain.BoardVO"> <!-- mysql 에서 사용하는 쿼리랑 같음 org.zerock.domain.BoardVO -->
+		<!-- select bno,title,contents,userId,siteLink from boardtable where bno=#{bno} -->
+
+		select b.bno, b.title, b.contents, b.userId, b.siteNumber, s.siteLink
+		from boardtable b left join sitetable s on s.siteNumber=b.siteNumber
+		where b.bno = #{bno}
+	</select>
+
+	<update id="update">
+		update boardtable set title=#{title},
+		contents=#{contents} where bno = #{bno}
+	</update>
+
+	<delete id="remove">
+		delete from boardtable where bno = #{bno}
+	</delete>
+
+	<select id="listAll" resultType="org.zerock.domain.BoardVO">
+		<!-- <![CDATA[select bno, title,contents,userId,siteNumber from boardtable 
+			where bno>0 order by bno desc, date_time desc ]]> -->
+		select b.bno, b.title, b.contents, b.userId, b.siteNumber, s.siteLink
+		from boardtable b left join sitetable s on s.siteNumber=b.siteNumber
+	</select>
+
+	<select id="listPage" resultType="org.zerock.domain.BoardVO">
+		select b.bno, b.title, b.contents, b.userId, b.siteNumber, s.siteLink
+		from boardtable b left join sitetable s on s.siteNumber=b.siteNumber
+		<!-- select *from boardtable where bno>0 order by bno desc limit #{page},10 -->
+	</select>
+
+	<select id="listCriteria" resultType="org.zerock.domain.BoardVO">
+		select b.bno, b.title,
+		b.contents, b.userId, b.siteNumber, s.siteLink
+		from boardtable b left
+		join sitetable s on s.siteNumber=b.siteNumber where bno>0 order by bno
+		desc limit
+		#{startPage},#{perPageNum}
+	</select>
+
+	<select id="countPaging" resultType="int">
+		select count(bno) from
+		boardtable where bno > 0
+	</select>
+
+	<select id="listSearch" resultType="BoardVO">
+	select *from boardtable where bno>0 order by 
+	bno desc limit #{pageStart}, #{perPageNum}
+	</select>
+	
+	<select id="listSearchCount" resultType="int">
+	select count(#{bno}) from boardtable where bno>0
+	</select>
+
+
+</mapper>
