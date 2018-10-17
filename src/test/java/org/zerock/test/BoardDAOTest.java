@@ -55,7 +55,7 @@ public class BoardDAOTest {
 		
 		List<BoardVO> list = dao.listPage(page);
 		for(BoardVO boardVO : list) {
-			logger.info(boardVO.getBno() + " : "+ boardVO.getTitle());
+			//logger.info(boardVO.getBno() + " : "+ boardVO.getTitle());
 		}
 	}
 	
@@ -68,7 +68,7 @@ public class BoardDAOTest {
 		List<BoardVO> list = dao.listCriteria(cri);
 		
 		for(BoardVO boardVO : list) {
-			logger.info(boardVO.getBno()+":"+boardVO.getTitle());
+			//logger.info(boardVO.getBno()+":"+boardVO.getTitle());
 		}
 	}
 	

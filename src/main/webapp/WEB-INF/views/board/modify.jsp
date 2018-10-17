@@ -37,7 +37,7 @@
 
 	<div class="box-footer">
 		<button type="submit" class="btn btn-primary">SAVE</button>
-		<button type="submit" class="btn btn-worning">CANCEL</button>
+		<button type="submit" class="btn btn-warning">CANCEL</button>
 	</div>
 
 	<script>
@@ -45,11 +45,12 @@
 		var formObj = $("form[role='form']");
 		console.log(formObj);
 		
-		$(".btn-waring").on("click",function() {
-			self.location="/board/listpage";
+		$(".btn-warning").on("click",function() {
+			history.back();
 		});
 		
 		$(".btn-primary").on("click", function() {
+			
 			formObj.submit();
 		});
 	});

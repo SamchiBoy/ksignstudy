@@ -35,7 +35,7 @@
 		<div class="btn-gruop">
 			<!-- <a href="/board/modify?bno=${boardVO.bno}">MODIFY(href OK)</a>-->
 			<button type="button" onClick="javascript:change('mod2')"
-				class="btn btn-info">MODIFY</button>
+				class="btn btn-info" name="modifybtn" id="modifybtn">MODIFY</button>
 			<button type="button" onClick="javascript:change('mod3')"
 				class="btn btn-info">MODIFY(page)</button>
 			<button type="button" onClick="javascript:change('remove')"
@@ -63,7 +63,7 @@
 
 </div>
 
-<form role="form" action="modifyPage" method="post">
+<form role="form" action="modify?bno=${boardVO.bno }" method="post">
 
 	<input type="hidden" name="bno" value="${boardVO.bno }"> <input
 		type="hidden" name="page" value="${cri.page }"> <input
@@ -81,37 +81,40 @@
 
 	function change(target2) {
 		var u2 = '';
-
+		var formObj = $("form[role='form']");
+		console.log(formObj);
+		
 		if (target2 == 'mod2') {
-
+			
+			
 			$("input[name='title']").removeAttr("readOnly");
 			$("textarea[name='contents']").removeAttr("readOnly");
+
 			// pause(); ????
 			// if one more click -> $("??").attr("ATTR"); 
 
+			//document.location.href = "/board/readPage?bno=" + ${cri.page};
+			$(modifybtn).click(function(){
+				formObj.submit();
+			});
+			
 			u2 = modify;
-			//document.location.href="/board/listPage?page="+${cri.page};
-			
-			
 			return;
-		} 
-		else if(target2=='mod3'){
-			u2=modify;
-		}
-		else if (target2 == 'remove') {
+		} else if (target2 == 'mod3') {
+			u2 = modify;
+		} else if (target2 == 'remove') {
 			u2 = remove;
 			alert("ok dlt");
-			
+
 		} else if (target2 == 'listPage') {
 			history.back();
 			history.reload();
 			return;
 		}
-			document.location.href = u2;
-		
-			
+
+		document.location.href = u2;
+
 	}
-	
 
 	/* 
 	  function move(target) {

@@ -32,7 +32,7 @@ public class BoardController {
 	@RequestMapping(value = "/register", method = { RequestMethod.POST, RequestMethod.GET })
 	public String registPOST(BoardVO board) throws Exception {
 		System.out.println("This is /register");
-		logger.info("regist post......................");
+		//logger.info("regist post......................");
 		//logger.info(board.toString());
 		// model.addAttribute("result","success");
 		return "/board/register";
@@ -51,7 +51,7 @@ public class BoardController {
 	@RequestMapping(value = "/listAll", method = RequestMethod.GET)
 	public void listAll(Model model) throws Exception {
 		System.out.println("This is /listall");
-		logger.info("show all list.................");
+		//logger.info("show all list.................");
 		model.addAttribute("list", service.listAll());
 	}
 
@@ -65,9 +65,6 @@ public class BoardController {
 
 	@RequestMapping(value = "/remove", method = { RequestMethod.GET, RequestMethod.POST })
 	public String remove(@RequestParam("bno") int bno, Model model) throws Exception {
-		System.out.println("This is /remove");
-		System.out.println("remove(bno) : " + bno);
-
 		model.addAttribute("bno", bno);
 		service.remove(bno);
 
@@ -77,14 +74,14 @@ public class BoardController {
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public void modifyGET(int bno, Model model) throws Exception {
 		System.out.println("This is /modifyGET");
-		logger.info("a..............");
+		//logger.info("a..............");
 		model.addAttribute(service.read(bno));
 	}
 
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	public String modifyPOST(BoardVO board) throws Exception {
 		System.out.println("This is /modifyPOST");
-		logger.info("mod post.............");
+		//logger.info("mod post.............");
 
 		service.modify(board);
 
@@ -94,14 +91,14 @@ public class BoardController {
 	@RequestMapping(value = "/listCri", method = RequestMethod.GET)
 	public void listAll(Criteria cri, Model model) throws Exception {
 		System.out.println("This is /listCri");
-		logger.info("show list page with Criteria..................");
+		//logger.info("show list page with Criteria..................");
 		model.addAttribute("list", service.listCriteria(cri));
 	}
 
 	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
 	public void listPage(Criteria cri, Model model) throws Exception {
 		System.out.println("This is /listPage");
-		logger.info(cri.toString());
+		//logger.info(cri.toString());
 		BoardVO board;
 		
 		PageMaker pageMaker = new PageMaker();
